@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LymphoScan - Advanced Lymphoma Detection</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <script src="https://unpkg.com/tiff.js@1.0.0/tiff.min.js"></script>
+  <script src="https://unpkg.com/utif@2.0.0/UTIF.min.js"></script>
+  
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-microscope me-2"></i>
+                LymphoScan
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <!-- Main Container -->
+  <div class="container main-container py-5">
+    <div class="page-header">
+      <h2>Advanced Lymphoma Detection</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <!-- Upload Card -->
+        <div class="upload-card mb-5">
+          <div class="card-header">
+            <div class="pattern"></div>
+            <h4 class="mb-0">Upload Microscopic Image</h4>
+          </div>
+          <div class="card-body p-4">
+            <!-- Flash messages -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger">
+              {% for message in messages %}
+              {{ message }}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            
+            <form action="/predict" method="post" enctype="multipart/form-data" id="upload-form">
+              <div class="mb-4">
+                <div class="upload-zone" id="upload-area">
+                  <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt fa-2x"></i>
+                  </div>
+                  <p>Drag & Drop Image Here</p>
+                  <small>or click to browse files</small>
+                  <div id="preview-container" class="d-none fade-in">
+                    <img id="image-preview" class="img-fluid"/>
+                  </div>
+                </div>
+                <input type="file" name="file" id="file-input" class="d-none" accept=".jpg,.jpeg,.png,.tif">
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary" id="analyze-btn" disabled>
+                  <i class="fas fa-search me-2"></i>Analyze Specimen
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Information Cards -->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="lymphoma-type text-center">
+              <div class="icon">
+                <i class="fas fa-dna"></i>
+              </div>
+              <h6>CLL</h6>
+              <p>Chronic Lymphocytic Leukemia</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="lymphoma-type text-center">
+              <div class="icon">
+                <i class="fas fa-virus"></i>
+              </div>
+              <h6>FL</h6>
+              <p>Follicular Lymphoma</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="lymphoma-type text-center">
+              <div class="icon">
+                <i class="fas fa-cells"></i>
+              </div>
+              <h6>MCL</h6>
+              <p>Mantle Cell Lymphoma</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="info-card mt-4"id="about">
+          <div class="card-header">
+            <h5 class="mb-0">About Lymphoma Classification</h5>
+          </div>
+          <div class="card-body">
+            <p>Lymphoma is a type of cancer that affects the lymphatic system, which is part of the body's germ-fighting network. This AI-powered system analyzes microscopic images to classify lymphoma into three major types based on cell morphology and pattern recognition.</p>
+            <p class="mb-0"><strong>Please note:</strong> This system is designed as a decision support tool and should be used in conjunction with professional medical evaluation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+            <p class="mb-0">
+                <i class="fas fa-heartbeat me-2"></i>
+                Lymphoma Detection System &copy; 2025
+            </p>    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

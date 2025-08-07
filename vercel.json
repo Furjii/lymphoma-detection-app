@@ -1,0 +1,5 @@
+{
+    "buildCommand": "pip install gdown && python download_model.py",
+  "outputDirectory": "static",
+  "cleanUrls": true
+}

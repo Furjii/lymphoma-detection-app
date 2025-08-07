@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results - LymphoScan</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <i class="fas fa-microscope me-2"></i>
+          LymphoScan
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/"
+                ><i class="fas fa-home me-1"></i>Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about"
+                ><i class="fas fa-info-circle me-1"></i>About</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container main-container py-5">
+      <div class="page-header">
+        <h2>Analysis Results</h2>
+        {{ timestamp }}
+      </div>
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <div class="upload-card mb-5">
+            <div class="card-header">
+              <div class="pattern"></div>
+              <h4 class="mb-0">Lymphoma Classification Report</h4>
+            </div>
+            <div class="card-body p-3">
+              <div class="row g-0">
+                <div class="col-md-5">
+                  <div class="result-image">
+                    <img
+                      src="{{ url_for('static', filename='uploads/' + filename) }}"
+                      alt="Microscopic Image"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <div class="result-details">
+                    <div
+                      class="diagnosis-box {% if prediction == 'CLL' %}cll{% elif prediction == 'FL' %}fl{% else %}mcl{% endif %}"
+                    >
+                      <i class="fas fa-microscope bg-icon"></i>
+                      <h2>{{ prediction }}</h2>
+                      {% if prediction == 'CLL' %}
+                      <p>Chronic Lymphocytic Leukemia</p>
+                      {% elif prediction == 'FL' %}
+                      <p>Follicular Lymphoma</p>
+                      {% elif prediction == 'MCL' %}
+                      <p>Mantle Cell Lymphoma</p>
+                      {% endif %}
+                    </div>
+
+                    <div class="confidence-meter">
+                      <h6>
+                        Confidence Level :
+                        <span>{{ confidence }}%</span>
+                      </h6>
+                      <div class="progress">
+                        <div
+                          class="progress-bar {% if confidence > 80 %}bg-success{% elif confidence > 50 %}bg-info{% else %}bg-warning{% endif %}"
+                          role="progressbar"
+                          style="width: {{ confidence }}%"
+                        ></div>
+                      </div>
+                      <small>
+                        <i class="fas fa-file me-1"></i>
+                        Original filename : {{ original }}
+                      </small>
+                      <div class="text-center mt-4">
+                        <a href="/" class="btn btn-primary">
+                          <i class="fas fa-redo me-2"></i>Analyze Another Sample
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4 shadow">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">About {{ prediction }}</h5>
+            </div>
+            <div class="card-body about-section" id="about">
+              {% if prediction == 'CLL' %}
+              <h6>Chronic Lymphocytic Leukemia (CLL)</h6>
+              <p>
+                CLL is a type of cancer that affects the blood and bone marrow.
+                It is the most common type of leukemia in adults.
+              </p>
+              <p><strong>Key Characteristics:</strong></p>
+              <ul>
+                <li>
+                  Small, mature-appearing lymphocytes in the peripheral blood
+                </li>
+                <li>Slow progression in most cases</li>
+                <li>Commonly affects older adults</li>
+                <li>
+                  May require no treatment for extended periods (watchful
+                  waiting)
+                </li>
+              </ul>
+              {% elif prediction == 'FL' %}
+              <h6>Follicular Lymphoma (FL)</h6>
+              <p>
+                FL is a type of non-Hodgkin lymphoma that begins in the
+                lymphatic system. It is typically a slow-growing or indolent
+                form of lymphoma.
+              </p>
+              <p><strong>Key Characteristics:</strong></p>
+              <ul>
+                <li>Abnormal growth of B cells in lymph nodes</li>
+                <li>Resembles the normal structure of follicles</li>
+                <li>Often presents as painless, swollen lymph nodes</li>
+                <li>Generally responds well to treatment but may recur</li>
+              </ul>
+              {% elif prediction == 'MCL' %}
+              <h6>Mantle Cell Lymphoma (MCL)</h6>
+              <p>
+                MCL is a rare type of B-cell non-Hodgkin lymphoma that affects
+                the lymph nodes and other tissues. It is typically aggressive.
+              </p>
+              <p><strong>Key Characteristics:</strong></p>
+              <ul>
+                <li>
+                  Malignant B cells from the mantle zone of the lymph node
+                  follicle
+                </li>
+                <li>Often diagnosed at an advanced stage</li>
+                <li>
+                  May involve multiple lymph nodes, bone marrow, and other
+                  organs
+                </li>
+                <li>Requires prompt and aggressive treatment in most cases</li>
+              </ul>
+              {% endif %}
+
+              <div class="disclaimer mt-4">
+                <strong>Medical Disclaimer:</strong> This is an automated
+                analysis and should not be used as the sole basis for diagnosis.
+                Please consult with a qualified healthcare professional for
+                proper diagnosis and treatment.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p class="mb-0">
+          <i class="fas fa-heartbeat me-2"></i>
+          Lymphoma Detection System &copy; 2025
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  </body>
+</html>

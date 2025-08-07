@@ -1,0 +1,29 @@
+# Virtual environment
+venv/
+.env
+
+# Pycache
+__pycache__/
+*.pyc
+
+# Model & dataset
+model/
+*.h5
+*.pkl
+
+# Uploads (temporary files from users)
+static/uploads/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Logs
+*.log

@@ -1,0 +1,415 @@
+/* LymphoScan - Modern CSS for Lymphoma Detection System */
+:root {
+  --primary: #2c3e50;
+  --secondary: #3498db;
+  --accent: #1abc9c;
+  --light: #ecf0f1;
+  --dark: #2c3e50;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --info: #3498db;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #e9ecef;
+  color: #34495e;
+}
+
+/* Navbar Styling */
+.navbar {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+  padding: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.brand-icon {
+  margin-right: 10px;
+  color: var(-light);
+}
+
+/* Main Container */
+.main-container {
+  min-height: calc(100vh - 160px);
+}
+
+/* Section Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 0.7rem;
+  position: relative;
+}
+
+.page-header:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: var(--accent);
+  margin: 15px auto 0;
+  border-radius: 2px;
+}
+
+/* Upload Card */
+.upload-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.upload-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+  color: white;
+  border: none;
+  padding: 1.2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header .pattern {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  width: 140px;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 70px;
+  z-index: 1;
+}
+
+.card-header h4, .card-header h5 {
+  position: relative;
+  z-index: 2;
+  font-weight: 600;
+}
+
+/* Upload Zone */
+.upload-zone {
+  background: linear-gradient(145deg, #f5f7fa, #ffffff);
+  border: 2px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-zone:hover, 
+.upload-zone.active {
+  border-color: var(--accent);
+  background: rgba(26, 188, 156, 0.05);
+}
+
+.upload-icon {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(52, 152, 219, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.upload-zone:hover .upload-icon {
+  background-color: rgba(52, 152, 219, 0.2);
+  transform: scale(1.1);
+}
+
+.upload-zone p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: var(--dark);
+}
+
+.upload-zone small {
+  color: #95a5a6;
+}
+
+/* Preview Container */
+#preview-container {
+  margin-top: 1.5rem;
+}
+
+#image-preview {
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--secondary) 0%, #2980b9 100%);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+  background: linear-gradient(135deg, #3498db 0%, #2573a7 100%);
+}
+
+.btn-primary:disabled {
+  background: #95a5a6;
+  box-shadow: none;
+}
+
+/* Lymphoma Type Info Cards */
+.lymphoma-type {
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+}
+
+.lymphoma-type:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.lymphoma-type h6 {
+  font-weight: 700;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
+.lymphoma-type p {
+  color: #7f8c8d;
+  margin-bottom: 0;
+}
+
+.lymphoma-type .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+
+/* Information Card */
+.info-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  
+}
+
+.info-card .card-header {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+
+
+/* Footer */
+footer {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+  background-color: var(--dark);
+  padding: 1.5rem 0;
+  color: white;
+  text-align: center;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Result page specific styles */
+.result-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+}
+
+.result-image {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.result-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.result-details {
+  padding: 2rem;
+}
+
+.diagnosis-box {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.diagnosis-box.cll {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.diagnosis-box.fl {
+  background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+}
+
+.diagnosis-box.mcl {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.diagnosis-box h2 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.diagnosis-box p {
+  margin-bottom: 0;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.diagnosis-box .bg-icon {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 8rem;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.confidence-meter {
+  margin-bottom: 2rem;
+}
+
+.confidence-meter h6 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.confidence-meter .progress {
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #ecf0f1;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.confidence-meter .progress-bar {
+  border-radius: 6px;
+  position: relative;
+  transition: width 1.5s ease-in-out;
+}
+
+.timestamp {
+  padding: 0.8rem 1rem;
+  background-color:rgb(237, 239, 241);
+  border-radius: 8px;
+  color:rgb(134, 133, 133);
+  font-size: 0.85rem;
+}
+
+.about-section {
+  padding: 1rem;
+  
+}
+
+.about-section h6 {
+  color: var(--secondary);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.disclaimer {
+  background-color: rgba(243, 156, 18, 0.1);
+  border-left: 4px solid var(--warning);
+  padding: 1rem;
+  border-radius: 4px;
+}
+/* Tambahkan di main.css untuk animasi yang lebih baik */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.upload-zone.active {
+    border-color: #007bff;
+    background-color: #e3f2fd;
+}
+
+#preview-container img,
+#preview-container canvas{
+    display: block;
+    margin: 15px auto;
+    max-width: 220px;   /* dari 280px menjadi 200px */
+    max-height: 200px;  /* dari 250px menjadi 180px */
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .result-details {
+    padding: 1.5rem;
+  }
+
+  .diagnosis-box {
+    padding: 1.5rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
