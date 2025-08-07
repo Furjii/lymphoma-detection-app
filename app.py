@@ -6,6 +6,15 @@ from predict import LymphomaDetector
 import time
 from PIL import Image
 
+# ===== Tambahan: Cek dan unduh model jika belum ada =====
+MODEL_PATH = 'model/model0.h5'
+if not os.path.exists(MODEL_PATH):
+    os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
+    import gdown
+    # Ganti URL berikut dengan link share Google Drive model kamu
+    gdown.download('https://drive.google.com/file/d/1AL8MzQPdFW6aMxKZyR9l6lCxVfXx9RS9/view?usp=sharing', MODEL_PATH, quiet=False)
+
+# ========================================================
 
 app = Flask(__name__)
 app.secret_key = 'lymphoma_detection_secret_key'
@@ -18,7 +27,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max upload
 
 # Initialize the model with your model1.h5 file
-detector = LymphomaDetector(model_path='model/model0.h5', labels=['CLL', 'FL', 'MCL'])
+detector = LymphomaDetector(model_path=MODEL_PATH, labels=['CLL', 'FL', 'MCL'])
 
 def allowed_file(filename):
     """Check if the file has an allowed extension."""
@@ -59,7 +68,6 @@ def predict():
             file.save(file_path)
             print(f"File saved at: {file_path}")
             print(f"Sent to HTML as filename: {filename}")
-
 
         # Resize the image to 224x224
         try:
