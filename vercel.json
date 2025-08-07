@@ -1,5 +1,14 @@
 {
-    "buildCommand": "pip install gdown && python download_model.py",
-  "outputDirectory": "static",
-  "cleanUrls": true
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ]
 }
